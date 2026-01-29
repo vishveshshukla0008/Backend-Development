@@ -1,25 +1,26 @@
-// server ko connect karna 
-// Database ko connect karna 
+const app = require("./src/app");
 
-const app = require("./src/app.js");
 const mongoose = require("mongoose");
 
-function connectToDatabase() {
-    mongoose.connect("mongodb+srv://vishveshshukla82_db_user:Merapass@cluster0.hssxylq.mongodb.net/day-6").then(() => {
-        console.log("Connected to DB");
-    }).catch((err) => {
-        console.log(err);
-    })
+// function connectToDB() {
+//     mongoose.connect("mongodb+srv://vishveshshukla82_db_user:Fkzn4SKFz0GJKT0c@cluster0.yec8ffx.mongodb.net/?appName=Cluster0").then(() => {
+//         console.log("Database has been connected !")
+//     }).catch(err => console.log(err))
+// }
+// 
+// connectToDB()
+
+function localDb() {
+    mongoose.connect("mongodb://localhost:27017/myfirstDB").then(() => {
+        console.log("Database has been connected !")
+    }).catch(err => console.log(err))
 }
 
-connectToDatabase()
+
+localDb()
 
 
 
-
-app.listen(8080, () => {
-    console.log("Application is running on 8080")
+app.listen(3000, () => {
+    console.log("Listening on port 8080");
 })
-
-// mongoose.connect()  connecting the app with database
-
