@@ -20,9 +20,7 @@ This document describes how to run the server and the current API endpoints. Kee
 - Create a `.env` file in the `Backend` folder with at least:
 
 ```
-PORT=3000
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.example.mongodb.net/dbname
-NODE_ENV=development
+PORT=8080
 ```
 
 ---
