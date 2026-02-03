@@ -1,3 +1,44 @@
 import axios from "axios";
 
-axios
+
+
+const api = axios.create({
+    baseURL: 'http://localhost:8080/api',
+});
+
+export const getNotes = async () => {
+    try {
+        const res = await api.get("/notes");
+        return res;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const addNotes = async (data) => {
+    try {
+        const res = await api.post("/notes", { title: data.title, description: data.description });
+        await getNotes()
+        return res;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const deleteNotes = async (noteId) => {
+    try {
+        let res = await api.delete(`/notes/${noteId}`)
+        return res;
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export const updateNotes = async (data) => {
+    try {
+        const res = await api.put(`/notes/update/${data.id}`, { title: data.title, description: data.description });
+        return res;
+    } catch (error) {
+        console.log(error)
+    }
+}

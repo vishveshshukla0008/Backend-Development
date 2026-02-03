@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NoteCard.scss";
-const NoteCard = ({
-  id = "3fqef43r34r32f4t24f4f24f24",
-  title = "Subh uthna hai",
-  description = "Mera nam yash shukla hai and maine cs se diploma kiya hai qwfbouref ihfihef qwefihqewifiehf iqwhfiewqhfihewif iqwhfiqhifhiwef iqwhfihqewifhwef iqhfihqwifhioqwef vef fqwefqw qwr qwr qwer qw rqw erqw erqwf wewfqwef qw fqw eq wf qw fewqf qw fqw f qw ",
-}) => {
+import { deleteNotes, getNotes } from "../api/axiosInstance";
+import UpdateNote from "./UpdateNote";
+
+const NoteCard = ({ notesData, setData, setSelectNote }) => {
+  async function updateData() {
+    await deleteNotes(notesData?._id);
+    const res2 = await getNotes();
+    setData(res2.data.allNotes);
+  }
+
+  function sendDataForUpdate() {
+    setSelectNote(notesData);
+  }
+
   return (
-    <div className="notecard glow-border">
-      <span className="id">{id}</span>
-      <div className="title">{title}</div>
-      <div className="description">{description}</div>
+    <div className="notecard">
+      <span className="id">{notesData?._id}</span>
+      <div className="title">{notesData?.title}</div>
+      <div className="description">{notesData?.description}</div>
+
+      <div className="controls">
+        <button
+          onClick={() => {
+            updateData();
+          }}>
+          Delete
+        </button>
+        <div className="update" onClick={sendDataForUpdate}>
+          <img src="edit-line.svg" alt="" />
+        </div>
+      </div>
     </div>
   );
 };
