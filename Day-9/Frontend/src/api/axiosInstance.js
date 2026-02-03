@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: 'https://backend-development-1-60nl.onrender.com/api',
 });
 
 export const getNotes = async () => {

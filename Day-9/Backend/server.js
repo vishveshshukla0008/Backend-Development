@@ -6,7 +6,7 @@ const connectDb = require("./src/config/db")
 
 async function startServer() {
     try {
-        await connectDb();
+        await connectDb(); // connecting to database
         app.listen(process.env.PORT, () => {
             console.log(`Application is runnning on port - ${process.env.PORT}`)
         })
