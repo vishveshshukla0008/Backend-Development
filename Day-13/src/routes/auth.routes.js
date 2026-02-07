@@ -1,13 +1,10 @@
-const { registerController, protectedController, loginController } = require("../controllers/auth.controller");
+const { userRegisterController, userLoginController, protectedController } = require("../controllers/auth.controller.js");
 
 const router = require("express").Router();
 
-
-router.route("/register").post(registerController);
-
-router.route("/login").post(loginController)
-
-router.route("/protected").post(protectedController)
-
+router.post("/register", userRegisterController);
+router.post("/login", userLoginController);
+router.post("/protected", protectedController);
 
 module.exports = router;
+
