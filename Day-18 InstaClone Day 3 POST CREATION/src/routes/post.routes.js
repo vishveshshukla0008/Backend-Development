@@ -1,0 +1,14 @@
+const postRouter = require("express").Router();
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
+const postController = require("../controllers/post.controller");
+
+postRouter
+    .post("/", upload.single("image"), postController.createPostController)
+    .get("/", postController.getUsersAllPostsController);
+
+postRouter
+    .get("/:postId", postController.getPostDetailsController)
+    .delete("/:postId", postController.deletePostController);
+
+module.exports = postRouter;
