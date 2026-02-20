@@ -1,0 +1,26 @@
+@use "./styles/variables" as *;
+
+@use "./styles/fonts";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark);
+  color: var(--white);
+  // main {
+  //   width: 100%;
+  //   height: 100%;
+  //   display: grid;
+  //   grid-template-columns: 1fr 3fr 1.5fr 1fr;
+  //   padding: var(--space-3) var(--space-6);
+  //   font-family: var(--font-primary);
+  //   font-weight: 300;
+  // }
+}

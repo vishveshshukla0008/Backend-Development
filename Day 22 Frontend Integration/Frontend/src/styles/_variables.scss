@@ -1,0 +1,65 @@
+:root {
+  /* ========== Colors ========== */
+  --color-primary: #5368ac;
+  --color-secondary: #262626;
+
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+
+  --color-text-main: #262626;
+  --color-text-muted: #9b9b9b;
+
+  --color-border: #dbdbdb;
+  --color-error: #e91426;
+  --color-success: #2ecc71;
+
+  --input-color: #25292e;
+
+  --button-color: #3846b5;
+  --activebtn-color: #4a5df9;
+
+  --dark: #0c1014;
+  --white: #ffffffef;
+  --whitedull: #b4b3b3;
+
+  /* ========== Font Sizes ========== */
+  --fs-xxs: 10px;
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 26px;
+  --fs-4xl: 28px;
+  --fs-5xl: 32px;
+  --fs-6xl: 34px;
+  --fs-7xl: 36px;
+  --fs-8xl: 38px;
+  --fs-9xl: 40px;
+
+  /* ========== Spacing ========== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* ========== Radius ========== */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  --right-sm-n: -0.75rem;
+  --top-sm-n: -0.5rem;
+
+  /* ========== Shadow ========== */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  /* ========== Transition ========== */
+  --transition: 0.25s ease-in;
+}

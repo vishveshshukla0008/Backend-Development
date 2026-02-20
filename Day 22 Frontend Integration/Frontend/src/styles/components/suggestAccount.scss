@@ -1,0 +1,36 @@
+.module-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 0.5fr;
+  // place-items: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  .image-section {
+    img {
+      width: var(--fs-8xl);
+      border-radius: var(--radius-full);
+    }
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+
+    p.username {
+      font-size: var(--fs-xs);
+      font-weight: 800;
+    }
+
+    p.desc {
+      font-size: var(--fs-xs);
+      color: var(--color-text-muted);
+    }
+  }
+  span.switch-btn {
+    color: var(--color-primary);
+    font-size: var(--fs-xs);
+    cursor: pointer;
+  }
+}
