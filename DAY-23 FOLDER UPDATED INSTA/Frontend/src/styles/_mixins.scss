@@ -1,0 +1,23 @@
+@mixin flex-center(
+  $justify: flex-start,
+  $align: flex-start,
+  $direction: row,
+  $gap: 0
+) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@mixin full-dimensions {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin btn-reset {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}

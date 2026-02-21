@@ -1,0 +1,101 @@
+@use "../../../styles/index.scss" as *;
+
+main {
+  @include full-dimensions;
+  @include flex-center(flex-start, center, row, 0);
+
+  .uiImage {
+    flex: 0.6;
+    @include flex-center(flex-end, center, row, 0);
+
+    img {
+      width: 65%;
+    }
+  }
+
+  .form-container {
+    flex: 0.5;
+    @include flex-center(start, center, row, 0);
+
+    .form-content-wrapper {
+      width: 70%;
+      @include flex-center(center, center, column, $space-8);
+      font-family: $font-primary;
+
+      p.heading {
+        font-size: $fs-5xl;
+        font-family: cursive;
+      }
+
+      form {
+        width: 75%;
+        @include flex-center(center, flex-start, column, $space-4);
+
+        input {
+          @include btn-reset;
+          color: $light;
+          padding: $space-3;
+          border-radius: $radius-sm;
+          @include full-dimensions;
+          background-color: $input-color;
+          border: 1px solid $input-border;
+
+          &::placeholder {
+            color: $dull-light;
+            font-size: $fs-xs;
+          }
+        }
+
+        div.password-div {
+          position: relative;
+          @include full-dimensions;
+
+          span {
+            position: absolute;
+            right: $space-2;
+            top: $space-3;
+            cursor: pointer;
+          }
+        }
+
+        .error-p {
+          color: $color-error;
+          font-size: $fs-xs;
+          text-align: start;
+        }
+      }
+
+      div.line-wrapper {
+        width: 80%;
+        @include flex-center(center, center, row, $space-4);
+
+        .line {
+          flex: 1;
+          background-color: $input-color;
+          height: 2px;
+        }
+
+        span {
+          color: $dull-light;
+        }
+      }
+
+      p {
+        width: 100%;
+        @include flex-center(center, center, row, $space-1);
+        span {
+          color: $dull-light;
+          font-size: $fs-xs;
+        }
+        .link {
+          text-decoration: none;
+          color: $light;
+          font-size: $fs-sm;
+        }
+      }
+      .link:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

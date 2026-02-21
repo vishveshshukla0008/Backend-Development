@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
-import "../styles/forms.scss";
-import Button from "../../../components/shared/Button";
 import { Link } from "react-router";
-import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
   const {
@@ -11,29 +8,25 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm();
 
-  const { handleLogin, loading } = useAuth();
-
   function onSubmit(data) {
-    handleLogin(data);
+    console.log("Login Data:", data);
   }
-
-  // if (loading) {
-  //   return <h1>Loading...</h1>;
-  // }
 
   return (
     <main>
       <div className="uiImage">
-        <img src="dummy/insta.png" alt="" />
+        <img src="images/insta.png" alt="" />
       </div>
-      <div className="form-container">
+
+      {/* <div className="form-container">
         <div className="form-content-wrapper">
           <p className="heading">Instagram</p>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
               {...register("username", {
-                required: { value: true, message: "Username is required !" },
+                required: "Username is required!",
               })}
               placeholder="Username"
             />
@@ -44,37 +37,40 @@ const Login = () => {
             <input
               type="password"
               {...register("password", {
-                required: { value: true, message: "Password is required!" },
+                required: "Password is required!",
                 minLength: {
                   value: 8,
-                  message: "Password should be at least 8 characters long!",
+                  message: "Password must be at least 8 characters",
                 },
                 maxLength: {
                   value: 12,
-                  message:
-                    "Password should not be more than 12 characters long!",
+                  message: "Password must not exceed 12 characters",
                 },
               })}
               placeholder="Password"
             />
+
             {errors.password && (
               <p className="error-p">{errors.password.message}</p>
             )}
-            <Button content="Log in" isDisabled={!isValid || loading} />
+
+            <button disabled={!isValid}>Log in</button>
           </form>
+
           <div className="line-wrapper">
             <div className="line"></div>
             <span>OR</span>
             <div className="line"></div>
           </div>
+
           <p>
             Don't have an account ?{" "}
             <Link className="link" to="/signup">
               Sign up
-            </Link>{" "}
+            </Link>
           </p>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };

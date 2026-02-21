@@ -1,8 +1,8 @@
 import React from "react";
-import "./Global.scss";
+import "./features/shared/global.scss";
 import LeftSidebar from "./components/LeftSidebar";
 import RightSidebar from "./components/RightSidebar";
-import AppRoutes from "./AppRoutes";
+import AppRoutes from "./App.Routes.jsx";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./features/auth/auth.context.jsx";
 
