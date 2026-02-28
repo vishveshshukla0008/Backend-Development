@@ -136,10 +136,10 @@ const postReactionController = async (req, res) => {
     try {
         const reactorUsername = req.user.username;
         const { postId } = req.params;
-        const reaction = req.body?.reaction;
+        const reaction = req.body?.reaction || "love";
 
         // allowed Reaction :
-        const allowedReactions = ["like", "love", "support", "sad", "wow", "funny"];
+        const allowedReactions = ["love", "support", "sad", "wow", "funny"];
         if (!allowedReactions.includes(reaction)) {
             return res.status(400).json({
                 success: false,

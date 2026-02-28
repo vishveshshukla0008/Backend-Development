@@ -1,0 +1,20 @@
+@use "../../../styles/index.scss" as *;
+
+nav {
+  width: 100%;
+  padding: $space-3 $space-2;
+  @include flex-center(space-between, center, row);
+
+  .left {
+    font-size: $fs-3xl;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  .right {
+    font-size: $fs-2xl;
+    .createBtn {
+      color: $color-error;
+      cursor: pointer;
+    }
+  }
+}

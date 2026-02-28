@@ -1,0 +1,110 @@
+@use "../../../styles/index.scss" as *;
+
+main.feed-page {
+  width: 100%;
+  min-height: 100%;
+  @include flex-center($direction:column, $gap:0.5rem);
+
+  .feed {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .posts {
+      width: 100%;
+      @include flex-center($direction: column, $gap: 1rem);
+      .post {
+        padding: $space-1 $space-2;
+        width: 100%;
+        @include flex-center($direction:column, $gap:$space-2);
+        .user-details {
+          width: 100%;
+          //   background-color: red;
+          @include flex-center($align: center, $gap: $space-2);
+          .img-wrapper {
+            width: $fs-3xl;
+            img {
+              width: 100%;
+              border-radius: 50%;
+            }
+          }
+
+          span {
+            font-size: $fs-md;
+            font-weight: bold;
+          }
+        }
+
+        .post-details {
+          width: 100%;
+          @include flex-center($direction:column, $gap:$space-3);
+          img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            object-position: top;
+          }
+
+          .controls {
+            width: 100%;
+            @include flex-center($justify: space-between, $align: center);
+            position: relative;
+
+            .like-btns {
+              position: absolute;
+              padding: $space-2;
+              bottom: $space-6;
+              @include flex-center(
+                $justify: center,
+                $align: center,
+                $gap: $space-2
+              );
+              backdrop-filter: blur(3px);
+              display: none;
+              border-radius: $radius-lg;
+
+              &:hover {
+                display: flex;
+              }
+            }
+
+            .love {
+              color: red;
+            }
+
+            .sad {
+              color: rgb(255, 174, 0);
+            }
+
+            .wow {
+              color: rgb(199, 199, 0);
+            }
+
+            .support {
+              color: rgb(0, 131, 0);
+            }
+
+            .funny {
+              color: tomato;
+            }
+
+            .icon {
+              font-size: $fs-xl;
+              cursor: pointer;
+            }
+
+            .left {
+              @include flex-center($gap: $space-3);
+            }
+          }
+
+          .controls:has(.like:hover) .like-btns {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import "../styles/form.scss";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { IoEye } from "react-icons/io5";
@@ -18,6 +18,7 @@ const Register = () => {
   } = useForm();
 
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
 
   function toggleShowPass() {
     setShowPass((prev) => !prev);
@@ -25,6 +26,7 @@ const Register = () => {
 
   async function onSubmit(data) {
     await handleRegister(data);
+    navigate("/");
     reset();
   }
 

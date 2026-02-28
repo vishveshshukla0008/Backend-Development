@@ -1,0 +1,40 @@
+@use "../../../styles/index.scss" as *;
+
+.right-sidebar {
+  position: sticky;
+  top: 1px;
+  height: 100vh;
+  width: 100%;
+  padding: $space-6 $space-4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $space-2;
+
+  .heading {
+    margin-block: $space-2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    p:first-child {
+      font-size: $fs-sm;
+      color: $color-text-muted;
+    }
+
+    p {
+      font-size: $fs-xs;
+      color: $color-text;
+    }
+  }
+
+  footer {
+    padding-top: $space-4;
+    color: $color-text-muted;
+    font-size: $fs-xs;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+}

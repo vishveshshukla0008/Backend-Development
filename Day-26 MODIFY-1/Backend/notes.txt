@@ -1,0 +1,22 @@
+Error Flow !
+
+
+Request aayi
+  ↓
+Route hit hua
+  ↓
+Controller run hua
+  ↓
+throw new AppError()
+  ↓
+Promise reject
+  ↓
+asyncWrapper catch(next)
+  ↓
+next(err)
+  ↓
+Express direct error middleware pe jump
+  ↓
+errorHandler middleware
+  ↓
+res.status().json({ success:false, message })

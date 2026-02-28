@@ -20,4 +20,10 @@
   border: none;
   outline: none;
   background-color: transparent;
+  cursor: pointer;
+
+  transition: all ease 0.45s;
+  &:active {
+    scale: 0.98;
+  }
 }

@@ -1,0 +1,38 @@
+@use "../../../styles/index.scss" as *;
+
+.module-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 0.5fr;
+  align-items: center;
+  gap: $space-4;
+
+  .image-section {
+    img {
+      width: $fs-5xl;
+      border-radius: $radius-round;
+    }
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+
+    p.username {
+      font-size: $fs-xs;
+      font-weight: 800;
+      color: $light;
+    }
+
+    p.desc {
+      font-size: $fs-xs;
+      color: $color-text-muted;
+    }
+  }
+
+  span.switch-btn {
+    color: $color-primary;
+    font-size: $fs-xs;
+    cursor: pointer;
+  }
+}

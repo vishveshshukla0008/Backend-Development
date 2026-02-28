@@ -32,7 +32,7 @@ userRouter
 
 /***
  * @route POST /api/users/reaction/: 
- * @description perform like operation on users post and type of 'reaction' is in ['like', 'love', 'support', 'sad', 'wow', 'funny']  accept reaction in body :
+ * @description perform like operation on users post and type of 'reaction' is in ['love', 'support', 'sad', 'wow', 'funny']  accept reaction in body :
  */
 
 userRouter.post("/reaction/:postId", identifyUser, userController.postReactionController)

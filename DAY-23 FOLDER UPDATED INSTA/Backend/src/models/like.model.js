@@ -8,7 +8,7 @@ const likeSchema = new mongoose.Schema(
         },
         post: {
             type: mongoose.Types.ObjectId,
-            ref: "posts",
+            ref: "post",
             required: [true, "A post is required"],
         },
         reactionType: {

@@ -1,0 +1,72 @@
+@use "../../../styles/index.scss" as *;
+
+.createPostWrapper {
+  @include flex-center(center, center);
+  width: 100%;
+  height: 100%;
+
+  .form-wrapper {
+    width: 50%;
+    height: 100%;
+    padding: $space-1;
+    @include flex-center($direction: column);
+    .child {
+      @include flex-center(center, center, column,$space-8);
+      padding: $space-5;
+      border-radius: $radius-lg;
+      width: 100%;
+      height: fit-content;
+      border: 1px solid $color-error;
+
+      form {
+        @include flex-center($direction: column, $gap: 1rem);
+        width: 100%;
+        .image {
+          @include flex-center(center);
+          width: 100%;
+          padding: $space-4;
+          border: 1px solid $input-color;
+          border-radius: $radius-lg;
+          cursor: pointer;
+
+          label {
+            @include flex-center(center, center, $gap:$space-2);
+            text-align: center;
+            
+            width: 100%;
+
+
+            .img-icon {
+                font-size: $fs-lg;
+                color: $color-error;
+            }
+          }
+        }
+
+        .description {
+          width: 100%;
+          textarea {
+            width: 100%;
+            background-color: transparent;
+            font-family: "Courier New", Courier, monospace;
+            color: $light;
+            padding: $space-4;
+          }
+        }
+
+        .button {
+          width: 100%;
+
+          button {
+            @include btn-reset;
+            color: $light;
+            width: 100%;
+            background-color: $color-error;
+            padding: $space-3;
+            border-radius: $radius-md;
+          }
+        }
+      }
+    }
+  }
+}

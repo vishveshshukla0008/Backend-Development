@@ -2,6 +2,7 @@ const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
 const ImageKit = require("@imagekit/nodejs");
 const { toFile } = require("@imagekit/nodejs");
+const likeModel = require("../models/like.model");
 const jwt = require("jsonwebtoken");
 
 const client = new ImageKit({
@@ -34,7 +35,6 @@ const createPostController = async (req, res) => {
 };
 
 const getUsersAllPostsController = async (req, res) => {
-
   const posts = await postModel.find({ user: req.user._id });
 
   return res
@@ -104,11 +104,34 @@ const deletePostController = async (req, res) => {
   }
 };
 
+const getFeedController = async (req, res) => {
+  try {
+    const user = req.user;
 
+    const feed = await Promise.all((await postModel.find().populate("user").lean()).map(async (post) => {
+      const isLiked = await likeModel.findOne({
+        username: user.username,
+        post: post._id
+      })
+
+      post.likedByCurrentUser = Boolean(isLiked) ? isLiked.reactionType : false;
+
+      return post;
+    }));
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Feed fetched success", feed });
+  } catch (error) {
+    console.log("error in fetching feed")
+    res.status(501).json({ success: false, message: error.message })
+  }
+};
 
 module.exports = {
   createPostController,
   getUsersAllPostsController,
   getPostDetailsController,
   deletePostController,
+  getFeedController,
 };
