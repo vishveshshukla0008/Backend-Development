@@ -1,0 +1,74 @@
+// Colors :
+
+$color-primary: #ff5100;
+$color-secondary: #22c55e;
+$color-accent: #f97316;
+
+$color-success: #16a34a;
+$color-warning: #facc15;
+$color-error: #e40707;
+
+$color-bg: #0c1014;
+$color-bg-light: #f9fafb;
+$color-bg-dark: #111827;
+
+$color-text: #111827;
+$color-text-muted: #8d8d8d;
+$color-border: #e5e7eb;
+
+$button-disable-primary: #3846b5;
+$button-active-primary: #4a5ef9e1;
+$button-hover-primary: #e75a19;
+
+$light: white;
+$dull-light: rgb(214, 214, 214);
+$dark: black;
+
+$input-border: rgba(255, 255, 255, 0.233);
+$input-color: #2f3031;
+
+$disabled-bg: #c4693f;
+
+// loader timeing
+$loader-duration: 1.25s;
+
+// fonts  :
+
+$fs-xs: 12px;
+$fs-sm: 14px;
+$fs-md: 16px;
+$fs-lg: 18px;
+$fs-xl: 20px;
+$fs-2xl: 24px;
+$fs-3xl: 30px;
+$fs-4xl: 38px;
+$fs-5xl: 48px;
+
+// font family :
+$font-primary: "Inter", sans-serif;
+$font-secondary: "Poppins", sans-serif;
+$font-mono: "JetBrains Mono", monospace;
+
+// spaces :
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
+$space-8: 40px;
+
+// radius :
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-round: 9999px;
+
+//$z-base: 1;
+$z-header: 100;
+$z-dropdown: 200;
+$z-modal: 1000;
+$z-toast: 2000;
+$z-tooltip: 3000;

@@ -1,50 +1,40 @@
 const mongoose = require("mongoose");
 
-
-const userSchema = new mongoose.Schema(
-    {
-        fullname: {
-            type: String,
-            required: [true, "Full name is required"],
-            trim: true,
-            minlength: [3, "Full name must be at least 3 characters"],
-            maxlength: [50, "Full name must not exceed 50 characters"]
-        },
-
-        username: {
-            type: String,
-            required: [true, "Username is required"],
-            unique: true,
-            trim: true,
-            lowercase: true,
-            minlength: [3, "Username must be at least 3 characters"],
-            maxlength: [30, "Username must not exceed 30 characters"]
-        },
-
-        email: {
-            type: String,
-            required: [true, "Email is required"],
-            unique: true,
-            trim: true,
-            lowercase: true,
-            match: [
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                "Please enter a valid email address"
-            ]
-        },
-
-        password: {
-            type: String,
-            required: [true, "Password is required"],
-            minlength: [6, "Password must be at least 6 characters"],
-            select: false
-        }
+const userSchema = new mongoose.Schema({
+    fullname: {
+        type: String,
+        required: [true, "Fullname is required"],
+        trim: true,
+        minlength: [3, "Fullname must be at least 3 characters"]
     },
-    {
-        timestamps: true,
-        versionKey: false
+    email: {
+        type: String,
+        lowercase: true,
+        required: [true, "Email is required"],
+        trim: true
+    },
+    username: {
+        type: String,
+        required: [true, "Username is required"],
+        trim: true,
+        minlenght: [3, "Username must be at least 3 characters"]
+    },
+    password: {
+        type: String,
+        required: [true, "Password is required"],
+        minlength: [8, "Password must be at least 8 characters"],
+        select: false
+    },
+    profilePic: {
+        type: String,
+        default: "https://ik.imagekit.io/s3d4yznrb/moodify/user.jpg",
     }
-);
+}, {
+    timestamps: true
+})
+
+userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ username: 1 }, { unique: true })
 
 
 const userModel = new mongoose.model("user", userSchema);

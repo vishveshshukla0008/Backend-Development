@@ -1,0 +1,27 @@
+@use "../../../styles/abstracts/index.scss" as *;
+button {
+  border: none;
+  padding: $space-2 $space-6;
+  border-radius: $radius-sm;
+  background-color: $color-primary;
+  color: $light;
+  width: 50%;
+  cursor: pointer;
+  transition: all ease 0.15s;
+  font-weight: 600;
+  i {
+    @include faspin($loader-duration);
+  }
+
+  &:hover {
+    background-color: $button-hover-primary;
+  }
+  &:active {
+    scale: 0.99;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $disabled-bg;
+  }
+}

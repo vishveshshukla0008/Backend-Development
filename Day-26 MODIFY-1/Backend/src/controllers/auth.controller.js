@@ -1,123 +1,155 @@
-const userModel = require("../models/user.model.js");
-const AppError = require("../utils/AppError");
-const asyncWrapper = require("../utils/asyncWrapper");
-const bcrypt = require("bcrypt");
-const blacklistModel = require("../models/blacklist.model.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const userModel = require("../models/user.model");
+const asyncWrapper = require("../utils/asyncWrapper");
+const AppError = require("../utils/AppError");
+const { redis } = require("../config/cache");
 
-const registerUserController = asyncWrapper(async (req, res) => {
-    let { fullname, username, email, password } = req.body;
 
-    if (!fullname || !username || !email || !password) {
-        throw new AppError("All fields are required", 400);
+/***
+ * @route post /api/auth/register
+ * @description A Register Controller that register a new user on server and stores the data on mongoDB users collection.
+ * @access  Public
+ */
+
+const registerNewUserController = asyncWrapper(async (req, res, next) => {
+    let { username, fullname, email, password } = req.body;
+
+    if (!username || !fullname || !email || !password) {
+        throw new AppError("Missing credentials", 400);
     }
 
-    const normalizedEmail = email.toLowerCase().trim();
-    const normalizedUsername = username.toLowerCase().trim();
+    username = username.toLowerCase().trim();
     fullname = fullname.trim();
+    email = email.toLowerCase().trim();
+    password = password.trim();
 
-    const isUserAlreadyExists = await userModel.exists({
-        $or: [
-            { email: normalizedEmail },
-            { username: normalizedUsername }
-        ]
+    if (password.length < 8) {
+        throw new AppError("Password must be at least 8 characters long", 400);
+    }
+
+    const existingUser = await userModel.findOne({
+        $or: [{ email }, { username }],
     });
 
-    if (isUserAlreadyExists) {
+    if (existingUser) {
         throw new AppError("User already exists", 409);
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-    // 5. Create user
-    let user = await userModel.create({
-        fullname: fullname.trim(),
-        username: normalizedUsername,
-        email: normalizedEmail,
-        password: hashedPassword
-    });
+    let newUser;
 
+    try {
+        newUser = await userModel.create({
+            username,
+            email,
+            fullname,
+            password: hashedPassword,
+        });
+    } catch (err) {
+        if (err.code === 11000) {
+            throw new AppError("User already exists", 409);
+        }
+        throw err;
+    }
 
     const token = jwt.sign(
-        { userId: user._id },
+        { userId: newUser._id, username },
         process.env.JWT_SECRET,
-        { expiresIn: "3d" }
+        { expiresIn: "3d" },
     );
 
     res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 3 * 24 * 60 * 60 * 1000
+        maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
-
-    user = user.toObject();
+    const user = newUser.toObject();
     delete user.password;
 
     return res.status(201).json({
         success: true,
         message: "Registration successful",
-        user
+        user,
     });
 });
 
 
+
+/***
+ * @route POST /api/auth/login
+ * @description A Login controller that login the existing user and provide a token string in cookies .
+ * @access  Public
+ */
+
 const loginUserController = asyncWrapper(async (req, res) => {
-    // check the required fields:
     let { username, email, password } = req.body;
 
-    //Normalize this :
-    username = username?.toLowerCase().trim();
-    email = email?.toLowerCase().trim();
+    if ((!username && !email) || !password) {
+        throw new AppError("Invalid credentials", 401);
+    }
 
-    // check the user is present or not :
+    let user = await userModel.findOne({ $or: [{ username }, { email }] }).select("+password");
 
-    let user = await userModel.findOne({ $or: [{ username }, { email }] }).select("+password")
+    if (!user) throw new AppError("Invalid credentials", 401);
 
-    if (!user) throw new AppError("User does not exist", 401);
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
 
+    if (!isPasswordMatched) throw new AppError("Invalid Credentials !", 401);
 
-
-    // check pass :
-    const isPassMatch = await bcrypt.compare(password, user.password);
-
-    if (!isPassMatch) throw new AppError("Invalid Credentials");
-
-    const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "3d" });
+    const token = jwt.sign({ userId: user._id, username }, process.env.JWT_SECRET, { expiresIn: "3d" });
 
     user = user.toObject();
     delete user.password;
 
-    res.cookie("token", token);
+
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 3 * 24 * 60 * 60 * 1000,
+    })
 
     return res.status(200).json({ success: true, message: "Logged In", user })
-})
+});
+
+
+/***
+ * @route GET /api/auth/getme
+ * @description A get me controller that verfies the loggedin user and returns the user object.
+ * @access  Private
+ */
 
 const getMeController = asyncWrapper(async (req, res) => {
-    const userId = req.user._id;
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(req.user._id);
 
-    return res.status(200).json({ success: true, message: "User fetched Succesfully", user });
+    if (!user) throw new AppError("Unauthorized user", 401);
+
+    return res.status(200).json({ success: true, message: "User Fetched Success", user });
 })
 
-const logoutUser = asyncWrapper(async (req, res) => {
-    const token = req.cookies.token;
 
-    if (!token) throw new AppError("Login First for logout", 400);
+
+/***
+ * @route get /api/auth/logout
+ * @description A logout controller that logout the user, remove the current token from cookies and add the token in redis as key and current time as value :
+ * @access  Public
+ */
+
+const logoutUserController = asyncWrapper(async (req, res) => {
+    const token = req.cookies.token;
 
     res.clearCookie("token");
 
-    await blacklistModel.create({
-        token
-    })
+    await redis.set(token, Date.now().toString());
 
-    return res.status(200).json({
-        success: true,
-        message: "logout successfully."
-    })
-
+    return res.status(200).json({ success: true, message: "Logout Successfully !" });
 })
 
-module.exports = { registerUserController, loginUserController, getMeController, logoutUser }
+
+module.exports = { registerNewUserController, loginUserController, getMeController, logoutUserController };

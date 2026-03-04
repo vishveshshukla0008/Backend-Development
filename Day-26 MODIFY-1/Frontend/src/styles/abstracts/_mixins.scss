@@ -1,0 +1,39 @@
+@mixin flex-center(
+  $justify: flex-start,
+  $align: flex-start,
+  $direction: row,
+  $gap: 0
+) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@mixin full-dimensions {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin btn-reset {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  transition: all ease 0.45s;
+  &:active {
+    scale: 0.98;
+  }
+}
+@keyframes faspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@mixin faspin($duration: 1s) {
+  display: inline-block; 
+  animation: faspin $duration linear infinite;
+}

@@ -1,0 +1,40 @@
+@use "./index.scss" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: $color-bg;
+  color: $color-bg-light;
+  font-family: $font-primary;
+}
+
+#root {
+  @include flex-center(center, center);
+}
+
+.container {
+  width: 68.75rem;
+  //   background-color: rgb(44, 22, 22);
+  height: 100%;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+html,
+body {
+  scrollbar-width: none;
+  // -ms-overflow-style: none;
+}
