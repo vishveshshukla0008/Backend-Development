@@ -1,0 +1,64 @@
+@use "../../../styles/abstracts/index.scss" as *;
+
+.home-page-wrapper {
+  width: 100%;
+  @include flex-center($direction: column, $gap: $space-8);
+  padding-bottom: 5rem;
+  padding-top:$space-6;
+
+  .card-wrapper {
+    position: relative;
+    width: 100%;
+    @include flex-center($direction: column, $gap: $space-4);
+
+    span:first-child {
+      font-size: $fs-xl;
+      font-weight: 600;
+      color: $dull-light;
+    }
+
+    .last {
+      position: absolute;
+      right: 1%;
+      font-size: $fs-sm;
+      cursor: pointer;
+    }
+
+    .card {
+      width: 100%;
+      @include flex-center(start, center, row, $space-4);
+      background-color: $input-color;
+      padding: $space-4;
+      border-radius: $radius-md;
+      border-left: 3px solid $color-primary;
+
+      i {
+        font-size: $fs-3xl;
+        color: $color-primary;
+      }
+
+      div {
+        @include flex-center(center, flex-start, column);
+      }
+    }
+
+    .music-card-wrapper {
+      display: grid;
+      grid-template-columns:
+        1fr 1fr 1fr;
+      gap: $space-4;
+     
+        .img-wrapper {
+          width: 100%;
+
+          img {
+            object-fit: cover;
+            object-position: right;
+            border-radius: $space-2;
+          }.third {
+            object-position: center;
+          }
+        }
+    }
+  }
+}

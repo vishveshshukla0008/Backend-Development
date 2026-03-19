@@ -1,0 +1,23 @@
+@use "../../../styles/abstracts/index" as *;
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  @include flex-center(center, center, $gap: 10%);
+  background: rgba(0, 0, 0, 0.103);
+  backdrop-filter: blur(10px);
+  padding: $space-1;
+
+  div {
+    cursor: pointer;
+    i {
+      font-size: $fs-xl;
+    }
+    span {
+      font-size: $fs-xs;
+    }
+    @include flex-center(center, center, column, $gap: $space-1);
+  }
+}

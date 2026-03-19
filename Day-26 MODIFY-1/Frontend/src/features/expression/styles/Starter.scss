@@ -1,0 +1,54 @@
+@use "../../../styles/abstracts/index" as *;
+
+.wrapper {
+  width: 100%;
+  height: fit-content;
+  @include flex-center(center, center, column, $space-6);
+  background-color: $input-color;
+  border-radius: $radius-md;
+  padding-block: $space-6;
+
+  .logo-wrapper {
+    padding: $space-1;
+    width: fit-content;
+    @include flex-center(center, center);
+    border-radius: 50%;
+    border: 2px dashed $color-primary;
+    @include faspin(8s);
+    @include flex-center(center, center);
+
+    .inner {
+      display: inline;
+      background-color: $button-hover-primary;
+      border-radius: 50%;
+      padding: $space-6;
+      width: 5rem;
+      height: 5rem;
+      padding: $space-2;
+      animation: faspin 8s linear infinite reverse;
+      font-size: $space-6;
+      @include flex-center(center, center);
+    }
+  }
+
+  div {
+    padding: $space-2;
+    width: 100%;
+    @include flex-center(center, center, column, $space-1);
+    text-align: center;
+    p.first {
+      font-size: $fs-xl;
+    }
+    p.second {
+      font-size: $fs-sm;
+      color: $color-text-muted;
+    }
+  }
+
+  .start-link {
+    @include flex-center(center, center);
+    width: 100%;
+    text-decoration: none;
+  }
+
+}

@@ -1,0 +1,40 @@
+@use "../../../styles/abstracts/index" as *;
+
+nav {
+  width: 100%;
+  padding-block: $space-1;
+  @include flex-center(space-between, center);
+  i {
+    font-size: $fs-xl;
+  }
+
+  .left {
+    @include flex-center(center, center, $gap: $space-4);
+    i {
+      height: fit-content;
+      width: fit-content;
+      font-size: $fs-3xl;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: $input-border;
+      padding: $space-2;
+    }
+
+    span {
+      font-size: $fs-lg;
+      font-weight: 600;
+    }
+  }
+
+  .right {
+    @include flex-center($gap: $space-4);
+    i {
+      height: fit-content;
+      width: fit-content;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: $input-border;
+      padding: $space-2;
+    }
+  }
+}

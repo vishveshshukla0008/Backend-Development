@@ -5,6 +5,17 @@ const api = axios.create({
     withCredentials: true,
 });
 
+// Response interceptor to handle auth errors
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        // If 401 (Unauthorized), clear the stored user
+        if (error.response?.status === 401) {
+            localStorage.removeItem("user");
+        }
+        return Promise.reject(error);
+    }
+);
 
 export const getMe = async () => {
     try {
@@ -13,7 +24,7 @@ export const getMe = async () => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 export const register = async (data) => {
     try {
@@ -22,7 +33,7 @@ export const register = async (data) => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 export const login = async (data) => {
     try {
@@ -31,7 +42,7 @@ export const login = async (data) => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 export const logout = async () => {
     try {
@@ -40,4 +51,4 @@ export const logout = async () => {
     } catch (error) {
         throw error;
     }
-}
+};

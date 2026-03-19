@@ -1,16 +1,18 @@
 import React from "react";
-import FaceExpression from "./features/expression/FaceExpression";
 import "./styles/abstracts/global.scss";
 import { RouterProvider } from "react-router";
 import { router } from "./appRoutes";
-import { AuthProvider } from "./features/auth/authContext";
+import { Toaster } from "react-hot-toast";
+import Navbar from "./features/shared/components/Navbar";
+import BottonmBar from "./features/shared/components/BottonmBar";
 
 const App = () => {
   return (
     <div className="container">
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <Toaster position="top-center" />
+      <Navbar />
+      <RouterProvider router={router} />
+      <BottonmBar />
     </div>
   );
 };

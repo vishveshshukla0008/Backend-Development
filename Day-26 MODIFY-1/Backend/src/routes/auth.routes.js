@@ -1,10 +1,11 @@
 const authRouter = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const { authUser } = require("../middlewares/auth.middleware");
+const { registerValidation } = require("../validation/auth.validator.js");
 
 
 
-authRouter.post("/register", authController.registerNewUserController);
+authRouter.post("/register", registerValidation, authController.registerNewUserController);
 
 
 

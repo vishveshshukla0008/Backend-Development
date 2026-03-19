@@ -23,9 +23,11 @@ body {
 }
 
 .container {
+  position: relative;
   width: 68.75rem;
-  //   background-color: rgb(44, 22, 22);
+  padding: $space-2;
   height: 100%;
+  padding-bottom: $space-4;
 }
 
 img {
@@ -36,5 +38,4 @@ img {
 html,
 body {
   scrollbar-width: none;
-  // -ms-overflow-style: none;
 }
